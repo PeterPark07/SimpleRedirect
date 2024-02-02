@@ -24,7 +24,7 @@ def redirect_to_url():
     if stored_url:
         return redirect(stored_url, code=302)
     else:
-        return 'No URL set yet.'
+        return 'No redirect SET yet.'
 
 if __name__ == '__main__':
     app.run(debug=True)
