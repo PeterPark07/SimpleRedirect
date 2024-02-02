@@ -1,13 +1,14 @@
 from flask import Flask, redirect
+from urllib.parse import quote
 
 app = Flask(__name__)
 stored_url = None
 
-@app.route('/<path:url>')
-def set_url(url):
+@app.route('/<path:encoded_url>')
+def set_url(encoded_url):
     global stored_url
-    stored_url = url
-    return f'Successfully set URL to: {url}'
+    stored_url = quote(encoded_url)
+    return f'Successfully set URL to: {encoded_url}'
 
 @app.route('/')
 def redirect_to_url():
