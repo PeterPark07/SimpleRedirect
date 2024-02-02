@@ -1,14 +1,33 @@
-from flask import Flask, redirect
-from urllib.parse import quote
+from flask import Flask, redirect, request
 
 app = Flask(__name__)
 stored_url = None
 
-@app.route('/<path:encoded_url>')
-def set_url(encoded_url):
+@app.route('/set-url', methods=['GET', 'POST'])
+def set_url():
     global stored_url
-    stored_url = quote(encoded_url)
-    return f'Successfully set URL to: {encoded_url}'
+    if request.method == 'POST':
+        url = request.form['url']
+        stored_url = url
+        return redirect('/')
+    return '''
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Set URL</title>
+        </head>
+        <body>
+            <h2>Set URL</h2>
+            <form method="post">
+                <label for="url">Enter URL:</label>
+                <input type="text" id="url" name="url" required>
+                <button type="submit">Set URL</button>
+            </form>
+        </body>
+        </html>
+    '''
 
 @app.route('/')
 def redirect_to_url():
