@@ -3,7 +3,7 @@ from flask import Flask, redirect, request
 app = Flask(__name__)
 stored_url = None
 
-@app.route('/set-url', methods=['GET', 'POST'])
+@app.route('/set', methods=['GET', 'POST'])
 def set_url():
     global stored_url
     if request.method == 'POST':
