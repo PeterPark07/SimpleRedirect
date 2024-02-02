@@ -11,23 +11,12 @@ def set_url():
         stored_url = url
         return redirect('/')
     return '''
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Set URL</title>
-        </head>
-        <body>
-            <h2>Set URL</h2>
-            <form method="post">
-                <label for="url">Enter URL:</label>
-                <input type="text" id="url" name="url" required>
-                <button type="submit">Set URL</button>
-            </form>
-        </body>
-        </html>
-    '''
+    <form method="post">
+        <label for="url">Enter URL:</label>
+        <input type="text" id="url" name="url" required>
+        <button type="submit">Set URL</button>
+    </form>
+'''
 
 @app.route('/')
 def redirect_to_url():
