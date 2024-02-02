@@ -13,7 +13,7 @@ def set_url():
     return '''
     <form method="post">
         <label for="url">Enter URL:</label>
-        <input type="text" id="url" name="url" required>
+        <input type="text" id="url" name="url" value="https://"required>
         <button type="submit">Set URL</button>
     </form>
 '''
