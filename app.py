@@ -1,4 +1,5 @@
 from flask import Flask, redirect, request
+from database import log, access
 
 app = Flask(__name__)
 stored_url = None
@@ -7,8 +8,9 @@ stored_url = None
 def set_url():
     global stored_url
     if request.method == 'POST':
-        url = request.form['url']
-        stored_url = url
+        stored_url = request.form['url']
+        
+        log(request, stored_url)
         return redirect('/')
     return '''
     <form method="post">
@@ -22,8 +24,11 @@ def set_url():
 def redirect_to_url():
     global stored_url
     if stored_url:
+        access(request, stored_url)
         return redirect(stored_url, code=302)
+       
     else:
+        access(request, 'No redirect SET yet.')
         return 'No redirect SET yet.'
 
 if __name__ == '__main__':
